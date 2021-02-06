@@ -9,7 +9,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>ignite.handlers.early_stopping &mdash; ignite master documentation</title>
+  <title>ignite.handlers.time_limit &mdash; ignite master documentation</title>
   
 
   
@@ -18,7 +18,7 @@
   
   
   
-    <link rel="canonical" href="https://pytorch.org/ignite/index.html_modules/ignite/handlers/early_stopping.html"/>
+    <link rel="canonical" href="https://pytorch.org/ignite/index.html_modules/ignite/handlers/time_limit.html"/>
   
 
   
@@ -215,7 +215,7 @@
         </dl>
         <dl>
             <dt>Branches</dt>
-            <dd><a href="early_stopping.html">master</a></dd>
+            <dd><a href="time_limit.html">master</a></dd>
         </dl>
     </div>
 </div>
@@ -258,7 +258,7 @@
         
           <li><a href="../handlers.html">ignite.handlers</a> &gt;</li>
         
-      <li>ignite.handlers.early_stopping</li>
+      <li>ignite.handlers.time_limit</li>
     
     
       <li class="pytorch-breadcrumbs-aside">
@@ -286,111 +286,54 @@
             <div role="main" class="main-content" itemscope="itemscope" itemtype="http://schema.org/Article">
              <article itemprop="articleBody" id="pytorch-article" class="pytorch-article">
               
-  <h1>Source code for ignite.handlers.early_stopping</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">cast</span>
+  <h1>Source code for ignite.handlers.time_limit</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Optional</span>
 
-<span class="kn">from</span> <span class="nn">ignite.base</span> <span class="kn">import</span> <span class="n">Serializable</span>
 <span class="kn">from</span> <span class="nn">ignite.engine</span> <span class="kn">import</span> <span class="n">Engine</span>
+
+<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;TimeLimit&quot;</span><span class="p">]</span>
+
 <span class="kn">from</span> <span class="nn">ignite.utils</span> <span class="kn">import</span> <span class="n">setup_logger</span>
 
-<span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;EarlyStopping&quot;</span><span class="p">]</span>
 
-
-<div class="viewcode-block" id="EarlyStopping"><a class="viewcode-back" href="../../../handlers.html#ignite.handlers.EarlyStopping">[docs]</a><span class="k">class</span> <span class="nc">EarlyStopping</span><span class="p">(</span><span class="n">Serializable</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;EarlyStopping handler can be used to stop the training if no improvement after a given number of events.</span>
+<div class="viewcode-block" id="TimeLimit"><a class="viewcode-back" href="../../../handlers.html#ignite.handlers.TimeLimit">[docs]</a><span class="k">class</span> <span class="nc">TimeLimit</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;TimeLimit handler can be used to control training time for computing environments where session time is limited.</span>
+<span class="sd">    Timer starts when handler is created and not training started.</span>
+<span class="sd">    This handler gracefully terminates the training if time passed in the training exceeds a limit.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        patience (int):</span>
-<span class="sd">            Number of events to wait if no improvement and then stop the training.</span>
-<span class="sd">        score_function (callable):</span>
-<span class="sd">            It should be a function taking a single argument, an :class:`~ignite.engine.engine.Engine` object,</span>
-<span class="sd">            and return a score `float`. An improvement is considered if the score is higher.</span>
-<span class="sd">        trainer (Engine):</span>
-<span class="sd">            trainer engine to stop the run if no improvement.</span>
-<span class="sd">        min_delta (float, optional):</span>
-<span class="sd">            A minimum increase in the score to qualify as an improvement,</span>
-<span class="sd">            i.e. an increase of less than or equal to `min_delta`, will count as no improvement.</span>
-<span class="sd">        cumulative_delta (bool, optional):</span>
-<span class="sd">            It True, `min_delta` defines an increase since the last `patience` reset, otherwise,</span>
-<span class="sd">            it defines an increase after the last event. Default value is False.</span>
+<span class="sd">        limit_sec (int, optional): Maximum time before training terminates (in seconds). Defaults to 28800.</span>
 
 <span class="sd">    Examples:</span>
 
-<span class="sd">    .. code-block:: python</span>
+<span class="sd">        .. code-block:: python</span>
 
-<span class="sd">        from ignite.engine import Engine, Events</span>
-<span class="sd">        from ignite.handlers import EarlyStopping</span>
+<span class="sd">            from ignite.engine import Events</span>
+<span class="sd">            from ignite.handlers import TimeLimit</span>
 
-<span class="sd">        def score_function(engine):</span>
-<span class="sd">            val_loss = engine.state.metrics[&#39;nll&#39;]</span>
-<span class="sd">            return -val_loss</span>
+<span class="sd">            handler = TimeLimit() # 8 hours of training</span>
+<span class="sd">            trainer.add_event_handler(Events.ITERATION_COMPLETED, handler)</span>
 
-<span class="sd">        handler = EarlyStopping(patience=10, score_function=score_function, trainer=trainer)</span>
-<span class="sd">        # Note: the handler is attached to an *Evaluator* (runs one epoch on validation dataset).</span>
-<span class="sd">        evaluator.add_event_handler(Events.COMPLETED, handler)</span>
-
+<span class="sd">    .. versionadded:: 0.4.3</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">_state_dict_all_req_keys</span> <span class="o">=</span> <span class="p">(</span>
-        <span class="s2">&quot;counter&quot;</span><span class="p">,</span>
-        <span class="s2">&quot;best_score&quot;</span><span class="p">,</span>
-    <span class="p">)</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">limit_sec</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">28800</span><span class="p">):</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
-        <span class="bp">self</span><span class="p">,</span>
-        <span class="n">patience</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-        <span class="n">score_function</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
-        <span class="n">trainer</span><span class="p">:</span> <span class="n">Engine</span><span class="p">,</span>
-        <span class="n">min_delta</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>
-        <span class="n">cumulative_delta</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">limit_sec</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Argument limit_sec should be an integer.&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">limit_sec</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Argument limit_sec should be a positive integer.&quot;</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">callable</span><span class="p">(</span><span class="n">score_function</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Argument score_function should be a function.&quot;</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">patience</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Argument patience should be positive integer.&quot;</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="n">min_delta</span> <span class="o">&lt;</span> <span class="mf">0.0</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Argument min_delta should not be a negative number.&quot;</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">trainer</span><span class="p">,</span> <span class="n">Engine</span><span class="p">):</span>
-            <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Argument trainer should be an instance of Engine.&quot;</span><span class="p">)</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">score_function</span> <span class="o">=</span> <span class="n">score_function</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">patience</span> <span class="o">=</span> <span class="n">patience</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">min_delta</span> <span class="o">=</span> <span class="n">min_delta</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">cumulative_delta</span> <span class="o">=</span> <span class="n">cumulative_delta</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">trainer</span> <span class="o">=</span> <span class="n">trainer</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">best_score</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># type: Optional[float]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">limit_sec</span> <span class="o">=</span> <span class="n">limit_sec</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">logger</span> <span class="o">=</span> <span class="n">setup_logger</span><span class="p">(</span><span class="vm">__name__</span> <span class="o">+</span> <span class="s2">&quot;.&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">engine</span><span class="p">:</span> <span class="n">Engine</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">score</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">score_function</span><span class="p">(</span><span class="n">engine</span><span class="p">)</span>
-
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">best_score</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">best_score</span> <span class="o">=</span> <span class="n">score</span>
-        <span class="k">elif</span> <span class="n">score</span> <span class="o">&lt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">best_score</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">min_delta</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">cumulative_delta</span> <span class="ow">and</span> <span class="n">score</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">best_score</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">best_score</span> <span class="o">=</span> <span class="n">score</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">+=</span> <span class="mi">1</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;EarlyStopping: </span><span class="si">%i</span><span class="s2"> / </span><span class="si">%i</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">counter</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">patience</span><span class="p">))</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">&gt;=</span> <span class="bp">self</span><span class="o">.</span><span class="n">patience</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;EarlyStopping: Stop training&quot;</span><span class="p">)</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">trainer</span><span class="o">.</span><span class="n">terminate</span><span class="p">()</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">best_score</span> <span class="o">=</span> <span class="n">score</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">=</span> <span class="mi">0</span>
-
-    <span class="k">def</span> <span class="nf">state_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s2">&quot;OrderedDict[str, float]&quot;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">OrderedDict</span><span class="p">([(</span><span class="s2">&quot;counter&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">counter</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;best_score&quot;</span><span class="p">,</span> <span class="n">cast</span><span class="p">(</span><span class="nb">float</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">best_score</span><span class="p">))])</span>
-
-    <span class="k">def</span> <span class="nf">load_state_dict</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">state_dict</span><span class="p">:</span> <span class="n">Mapping</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">load_state_dict</span><span class="p">(</span><span class="n">state_dict</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">counter</span> <span class="o">=</span> <span class="n">state_dict</span><span class="p">[</span><span class="s2">&quot;counter&quot;</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">best_score</span> <span class="o">=</span> <span class="n">state_dict</span><span class="p">[</span><span class="s2">&quot;best_score&quot;</span><span class="p">]</span></div>
+        <span class="n">elapsed_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">start_time</span>
+        <span class="k">if</span> <span class="n">elapsed_time</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">limit_sec</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Reached the time limit: </span><span class="si">{}</span><span class="s2"> sec. Stop training&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">limit_sec</span><span class="p">))</span>
+            <span class="n">engine</span><span class="o">.</span><span class="n">terminate</span><span class="p">()</span></div>
 </pre></div>
 
              </article>
