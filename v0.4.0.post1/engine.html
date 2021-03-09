@@ -1,6 +1,7 @@
 
 
 
+
 <!DOCTYPE html>
 <!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
@@ -32,6 +33,7 @@
   <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
   <!-- <link rel="stylesheet" href="_static/pygments.css" type="text/css" /> -->
   <link rel="stylesheet" href="_static/css/ignite_theme.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" type="text/css" />
     <link rel="author" title="About these documents" href="about.html" />
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -100,13 +102,13 @@
           </li>
 
           <li>
-            <a href="https://pytorch.org/ignite/master/about.html">About us</a>
+            <a href="https://pytorch.org/ignite/master/about.html">About us</a> 
           </li>
 
         </ul>
       </div>
 
-      <a class="main-menu-open-button" href="#" data-behavior="open-mobile-menu"></a>
+      <!-- <a class="main-menu-open-button" href="#" data-behavior="open-mobile-menu"></a> -->
     </div>
 
   </div>
@@ -134,7 +136,7 @@
               
               
                 <div class="version">
-                  0.4.0.post1
+                  v0.4.0.post1
                 </div>
               
             
@@ -146,10 +148,8 @@
 
 
 <div role="search">
-  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
-    <input type="text" name="q" placeholder="Search Docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
+  <form id="rtd-search-form" class="wy-form">
+    <input type="text" placeholder="Search Docs" />
   </form>
 </div>
 
@@ -304,7 +304,7 @@
 <p>More details about those structures can be found in <a class="reference internal" href="concepts.html"><span class="doc">Concepts</span></a>.</p>
 <dl class="py class">
 <dt id="ignite.engine.engine.Engine">
-<em class="property">class </em><code class="sig-prename descclassname">ignite.engine.engine.</code><code class="sig-name descname">Engine</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">process_function</span><span class="p">:</span> <span class="n">Callable</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ignite/engine/engine.html#Engine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ignite.engine.engine.Engine" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">ignite.engine.engine.</code><code class="sig-name descname">Engine</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">process_function</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ignite/engine/engine.html#Engine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ignite.engine.engine.Engine" title="Permalink to this definition">¶</a></dt>
 <dd><p>Runs a given <code class="docutils literal notranslate"><span class="pre">process_function</span></code> over each batch of a dataset, emitting events as it goes.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -415,12 +415,12 @@ on every <a class="reference internal" href="#ignite.engine.engine.Engine.run" t
 </div>
 <dl class="py method">
 <dt id="ignite.engine.engine.Engine.add_event_handler">
-<code class="sig-name descname">add_event_handler</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event_name</span><span class="p">:</span> <span class="n">Any</span></em>, <em class="sig-param"><span class="n">handler</span><span class="p">:</span> <span class="n">Callable</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ignite/engine/engine.html#Engine.add_event_handler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ignite.engine.engine.Engine.add_event_handler" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">add_event_handler</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event_name</span></em>, <em class="sig-param"><span class="n">handler</span></em>, <em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwargs</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ignite/engine/engine.html#Engine.add_event_handler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ignite.engine.engine.Engine.add_event_handler" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add an event handler to be executed when the specified event is fired.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>event_name</strong> – An event or a list of events to attach the handler. Valid events are
+<li><p><strong>event_name</strong> (<em>Any</em>) – An event or a list of events to attach the handler. Valid events are
 from <a class="reference internal" href="#ignite.engine.events.Events" title="ignite.engine.events.Events"><code class="xref py py-class docutils literal notranslate"><span class="pre">Events</span></code></a> or any <code class="docutils literal notranslate"><span class="pre">event_name</span></code> added by
 <a class="reference internal" href="#ignite.engine.engine.Engine.register_events" title="ignite.engine.engine.Engine.register_events"><code class="xref py py-meth docutils literal notranslate"><span class="pre">register_events()</span></code></a>.</p></li>
 <li><p><strong>handler</strong> (<em>callable</em>) – the callable event handler that should be invoked. No restrictions on its signature.
@@ -439,6 +439,12 @@ passed here, for example during <code class="xref py py-attr docutils literal no
 <dl class="field-list simple">
 <dt class="field-odd">Returns</dt>
 <dd class="field-odd"><p><code class="xref py py-class docutils literal notranslate"><span class="pre">RemovableEventHandle</span></code>, which can be used to remove the handler.</p>
+</dd>
+<dt class="field-even">Parameters</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>event_name</strong> (<em>Any</em>) – </p></li>
+<li><p><strong>handler</strong> (<em>Callable</em>) – </p></li>
+</ul>
 </dd>
 </dl>
 <p>Example usage:</p>
@@ -467,7 +473,7 @@ See <a class="reference internal" href="#ignite.engine.events.Events" title="ign
 
 <dl class="py method">
 <dt id="ignite.engine.engine.Engine.fire_event">
-<code class="sig-name descname">fire_event</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event_name</span><span class="p">:</span> <span class="n">Any</span></em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/ignite/engine/engine.html#Engine.fire_event"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ignite.engine.engine.Engine.fire_event" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">fire_event</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event_name</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ignite/engine/engine.html#Engine.fire_event"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ignite.engine.engine.Engine.fire_event" title="Permalink to this definition">¶</a></dt>
 <dd><p>Execute all the handlers associated with given event.</p>
 <p>This method executes all handlers associated with the event
 <cite>event_name</cite>. This is the method used in <a class="reference internal" href="#ignite.engine.engine.Engine.run" title="ignite.engine.engine.Engine.run"><code class="xref py py-meth docutils literal notranslate"><span class="pre">run()</span></code></a> to call the
@@ -480,22 +486,25 @@ events are used in the engine, there is no need for the user to call
 the method.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
-<dd class="field-odd"><p><strong>event_name</strong> – event for which the handlers should be executed. Valid
+<dd class="field-odd"><p><strong>event_name</strong> (<em>Any</em>) – event for which the handlers should be executed. Valid
 events are from <a class="reference internal" href="#ignite.engine.events.Events" title="ignite.engine.events.Events"><code class="xref py py-class docutils literal notranslate"><span class="pre">Events</span></code></a> or any <cite>event_name</cite> added by
 <a class="reference internal" href="#ignite.engine.engine.Engine.register_events" title="ignite.engine.engine.Engine.register_events"><code class="xref py py-meth docutils literal notranslate"><span class="pre">register_events()</span></code></a>.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a></p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt id="ignite.engine.engine.Engine.has_event_handler">
-<code class="sig-name descname">has_event_handler</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">handler</span><span class="p">:</span> <span class="n">Callable</span></em>, <em class="sig-param"><span class="n">event_name</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>Any<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ignite/engine/engine.html#Engine.has_event_handler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ignite.engine.engine.Engine.has_event_handler" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">has_event_handler</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">handler</span></em>, <em class="sig-param"><span class="n">event_name</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ignite/engine/engine.html#Engine.has_event_handler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ignite.engine.engine.Engine.has_event_handler" title="Permalink to this definition">¶</a></dt>
 <dd><p>Check if the specified event has the specified handler.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>handler</strong> (<em>callable</em>) – the callable event handler.</p></li>
-<li><p><strong>event_name</strong> – The event the handler attached to. Set this
+<li><p><strong>event_name</strong> (<em>Optional</em><em>[</em><em>Any</em><em>]</em>) – The event the handler attached to. Set this
 to <code class="docutils literal notranslate"><span class="pre">None</span></code> to search all events.</p></li>
 </ul>
 </dd>
@@ -504,7 +513,7 @@ to <code class="docutils literal notranslate"><span class="pre">None</span></cod
 
 <dl class="py method">
 <dt id="ignite.engine.engine.Engine.load_state_dict">
-<code class="sig-name descname">load_state_dict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">state_dict</span><span class="p">:</span> <span class="n">collections.abc.Mapping</span></em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/ignite/engine/engine.html#Engine.load_state_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ignite.engine.engine.Engine.load_state_dict" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">load_state_dict</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">state_dict</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ignite/engine/engine.html#Engine.load_state_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ignite.engine.engine.Engine.load_state_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Setups engine from <cite>state_dict</cite>.</p>
 <p>State dictionary should contain keys: <cite>iteration</cite> or <cite>epoch</cite> and <cite>max_epochs</cite>, <cite>epoch_length</cite> and
 <cite>seed</cite>. If <cite>engine.state_dict_user_keys</cite> contains keys, they should be also present in the state dictionary.
@@ -513,6 +522,9 @@ Iteration and epoch values are 0-based: the first iteration or epoch is zero.</p
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>state_dict</strong> (<em>Mapping</em>) – a dict with parameters</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a></p>
 </dd>
 </dl>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="c1"># Restore from the 4rd epoch</span>
@@ -558,7 +570,7 @@ or any <code class="docutils literal notranslate"><span class="pre">event_name</
 
 <dl class="py method">
 <dt id="ignite.engine.engine.Engine.register_events">
-<code class="sig-name descname">register_events</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">event_names</span><span class="p">:</span> <span class="n">Any</span></em>, <em class="sig-param"><span class="n">event_to_attr</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>dict<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/ignite/engine/engine.html#Engine.register_events"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ignite.engine.engine.Engine.register_events" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">register_events</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">event_names</span></em>, <em class="sig-param"><span class="n">event_to_attr</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ignite/engine/engine.html#Engine.register_events"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ignite.engine.engine.Engine.register_events" title="Permalink to this definition">¶</a></dt>
 <dd><p>Add events that can be fired.</p>
 <p>Registering an event will let the user fire these events at any point.
 This opens the door to make the <a class="reference internal" href="#ignite.engine.engine.Engine.run" title="ignite.engine.engine.Engine.run"><code class="xref py py-meth docutils literal notranslate"><span class="pre">run()</span></code></a> loop even more
@@ -569,7 +581,11 @@ configurable.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>*event_names</strong> – An object (ideally a string or int) to define the name of the event being supported.</p></li>
 <li><p><strong>event_to_attr</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#dict" title="(in Python v3.9)"><em>dict</em></a><em>, </em><em>optional</em>) – A dictionary to map an event to a state attribute.</p></li>
+<li><p><strong>event_names</strong> (<em>Any</em>) – </p></li>
 </ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a></p>
 </dd>
 </dl>
 <p>Example usage:</p>
@@ -606,13 +622,13 @@ configurable.</p>
 
 <dl class="py method">
 <dt id="ignite.engine.engine.Engine.remove_event_handler">
-<code class="sig-name descname">remove_event_handler</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">handler</span><span class="p">:</span> <span class="n">Callable</span></em>, <em class="sig-param"><span class="n">event_name</span><span class="p">:</span> <span class="n">Any</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ignite/engine/engine.html#Engine.remove_event_handler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ignite.engine.engine.Engine.remove_event_handler" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">remove_event_handler</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">handler</span></em>, <em class="sig-param"><span class="n">event_name</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ignite/engine/engine.html#Engine.remove_event_handler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ignite.engine.engine.Engine.remove_event_handler" title="Permalink to this definition">¶</a></dt>
 <dd><p>Remove event handler <cite>handler</cite> from registered handlers of the engine</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>handler</strong> (<em>callable</em>) – the callable event handler that should be removed</p></li>
-<li><p><strong>event_name</strong> – The event the handler attached to.</p></li>
+<li><p><strong>event_name</strong> (<em>Any</em>) – The event the handler attached to.</p></li>
 </ul>
 </dd>
 </dl>
@@ -620,7 +636,7 @@ configurable.</p>
 
 <dl class="py method">
 <dt id="ignite.engine.engine.Engine.run">
-<code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span><span class="p">:</span> <span class="n">Iterable</span></em>, <em class="sig-param"><span class="n">max_epochs</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>int<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">epoch_length</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>int<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em>, <em class="sig-param"><span class="n">seed</span><span class="p">:</span> <span class="n">Optional<span class="p">[</span>int<span class="p">]</span></span> <span class="o">=</span> <span class="default_value">None</span></em><span class="sig-paren">)</span> &#x2192; ignite.engine.events.State<a class="reference internal" href="_modules/ignite/engine/engine.html#Engine.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ignite.engine.engine.Engine.run" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">run</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">data</span></em>, <em class="sig-param"><span class="n">max_epochs</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">epoch_length</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">seed</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ignite/engine/engine.html#Engine.run"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ignite.engine.engine.Engine.run" title="Permalink to this definition">¶</a></dt>
 <dd><p>Runs the <cite>process_function</cite> over the passed data.</p>
 <p>Engine has a state and the following logic is applied in this function:</p>
 <ul class="simple">
@@ -713,7 +729,7 @@ from newly provided data. Please, note that epoch length is not modified.</p>
 
 <dl class="py method">
 <dt id="ignite.engine.engine.Engine.state_dict">
-<code class="sig-name descname">state_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; collections.OrderedDict<a class="reference internal" href="_modules/ignite/engine/engine.html#Engine.state_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ignite.engine.engine.Engine.state_dict" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">state_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ignite/engine/engine.html#Engine.state_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ignite.engine.engine.Engine.state_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a dictionary containing engine’s state: “seed”, “epoch_length”, “max_epochs” and “iteration” and
 other state values defined by <cite>engine.state_dict_user_keys</cite></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">engine</span> <span class="o">=</span> <span class="n">Engine</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
@@ -745,21 +761,31 @@ other state values defined by <cite>engine.state_dict_user_keys</cite></p>
 
 <dl class="py method">
 <dt id="ignite.engine.engine.Engine.terminate">
-<code class="sig-name descname">terminate</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/ignite/engine/engine.html#Engine.terminate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ignite.engine.engine.Engine.terminate" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">terminate</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ignite/engine/engine.html#Engine.terminate"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ignite.engine.engine.Engine.terminate" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sends terminate signal to the engine, so that it terminates completely the run after the current iteration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">
 <dt id="ignite.engine.engine.Engine.terminate_epoch">
-<code class="sig-name descname">terminate_epoch</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/ignite/engine/engine.html#Engine.terminate_epoch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ignite.engine.engine.Engine.terminate_epoch" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">terminate_epoch</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ignite/engine/engine.html#Engine.terminate_epoch"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ignite.engine.engine.Engine.terminate_epoch" title="Permalink to this definition">¶</a></dt>
 <dd><p>Sends terminate signal to the engine, so that it terminates the current epoch after the current iteration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
 
 <dl class="py function">
 <dt id="ignite.engine.create_supervised_trainer">
-<code class="sig-prename descclassname">ignite.engine.</code><code class="sig-name descname">create_supervised_trainer</code><span class="sig-paren">(</span><em class="sig-param">model: torch.nn.modules.module.Module, optimizer: torch.optim.optimizer.Optimizer, loss_fn: Union[Callable, torch.nn.modules.module.Module], device: Optional[Union[str, torch.device]] = None, non_blocking: bool = False, prepare_batch: Callable = &lt;function _prepare_batch&gt;, output_transform: Callable = &lt;function &lt;lambda&gt;&gt;, deterministic: bool = False</em><span class="sig-paren">)</span> &#x2192; ignite.engine.engine.Engine<a class="reference internal" href="_modules/ignite/engine.html#create_supervised_trainer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ignite.engine.create_supervised_trainer" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">ignite.engine.</code><code class="sig-name descname">create_supervised_trainer</code><span class="sig-paren">(</span><em class="sig-param">model</em>, <em class="sig-param">optimizer</em>, <em class="sig-param">loss_fn</em>, <em class="sig-param">device=None</em>, <em class="sig-param">non_blocking=False</em>, <em class="sig-param">prepare_batch=&lt;function _prepare_batch&gt;</em>, <em class="sig-param">output_transform=&lt;function &lt;lambda&gt;&gt;</em>, <em class="sig-param">deterministic=False</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ignite/engine.html#create_supervised_trainer"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ignite.engine.create_supervised_trainer" title="Permalink to this definition">¶</a></dt>
 <dd><p>Factory function for creating a trainer for supervised models.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -780,6 +806,9 @@ to be assigned to engine’s state.output after each iteration. Default is retur
 <a class="reference internal" href="#ignite.engine.deterministic.DeterministicEngine" title="ignite.engine.deterministic.DeterministicEngine"><code class="xref py py-class docutils literal notranslate"><span class="pre">DeterministicEngine</span></code></a>, otherwise <a class="reference internal" href="#ignite.engine.engine.Engine" title="ignite.engine.engine.Engine"><code class="xref py py-class docutils literal notranslate"><span class="pre">Engine</span></code></a>
 (default: False).</p></li>
 </ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#ignite.engine.engine.Engine" title="ignite.engine.engine.Engine">ignite.engine.engine.Engine</a></p>
 </dd>
 </dl>
 <div class="admonition note">
@@ -805,12 +834,24 @@ For more information see:</p>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p><a class="reference internal" href="#ignite.engine.engine.Engine" title="ignite.engine.engine.Engine">Engine</a></p>
 </dd>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> (<em>torch.nn.modules.module.Module</em>) – </p></li>
+<li><p><strong>optimizer</strong> (<em>torch.optim.optimizer.Optimizer</em>) – </p></li>
+<li><p><strong>loss_fn</strong> (<em>Union</em><em>[</em><em>Callable</em><em>, </em><em>torch.nn.modules.module.Module</em><em>]</em>) – </p></li>
+<li><p><strong>device</strong> (<em>Optional</em><em>[</em><em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><em>torch.device</em><em>]</em><em>]</em>) – </p></li>
+<li><p><strong>non_blocking</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – </p></li>
+<li><p><strong>prepare_batch</strong> (<em>Callable</em>) – </p></li>
+<li><p><strong>output_transform</strong> (<em>Callable</em>) – </p></li>
+<li><p><strong>deterministic</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – </p></li>
+</ul>
+</dd>
 </dl>
 </dd></dl>
 
 <dl class="py function">
 <dt id="ignite.engine.create_supervised_evaluator">
-<code class="sig-prename descclassname">ignite.engine.</code><code class="sig-name descname">create_supervised_evaluator</code><span class="sig-paren">(</span><em class="sig-param">model: torch.nn.modules.module.Module</em>, <em class="sig-param">metrics: Optional[Dict[str</em>, <em class="sig-param">ignite.metrics.metric.Metric]] = None</em>, <em class="sig-param">device: Optional[Union[str</em>, <em class="sig-param">torch.device]] = None</em>, <em class="sig-param">non_blocking: bool = False</em>, <em class="sig-param">prepare_batch: Callable = &lt;function _prepare_batch&gt;</em>, <em class="sig-param">output_transform: Callable = &lt;function &lt;lambda&gt;&gt;</em><span class="sig-paren">)</span> &#x2192; ignite.engine.engine.Engine<a class="reference internal" href="_modules/ignite/engine.html#create_supervised_evaluator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ignite.engine.create_supervised_evaluator" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">ignite.engine.</code><code class="sig-name descname">create_supervised_evaluator</code><span class="sig-paren">(</span><em class="sig-param">model</em>, <em class="sig-param">metrics=None</em>, <em class="sig-param">device=None</em>, <em class="sig-param">non_blocking=False</em>, <em class="sig-param">prepare_batch=&lt;function _prepare_batch&gt;</em>, <em class="sig-param">output_transform=&lt;function &lt;lambda&gt;&gt;</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ignite/engine.html#create_supervised_evaluator"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ignite.engine.create_supervised_evaluator" title="Permalink to this definition">¶</a></dt>
 <dd><p>Factory function for creating an evaluator for supervised models.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
@@ -827,6 +868,9 @@ tuple of tensors <cite>(batch_x, batch_y)</cite>.</p></li>
 to be assigned to engine’s state.output after each iteration. Default is returning <cite>(y_pred, y,)</cite> which fits
 output expected by metrics. If you change it you should use <cite>output_transform</cite> in metrics.</p></li>
 </ul>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p><a class="reference internal" href="#ignite.engine.engine.Engine" title="ignite.engine.engine.Engine">ignite.engine.engine.Engine</a></p>
 </dd>
 </dl>
 <div class="admonition note">
@@ -851,6 +895,16 @@ The <cite>model</cite> should be moved by the user before creating an optimizer.
 </dd>
 <dt class="field-even">Return type</dt>
 <dd class="field-even"><p><a class="reference internal" href="#ignite.engine.engine.Engine" title="ignite.engine.engine.Engine">Engine</a></p>
+</dd>
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>model</strong> (<em>torch.nn.modules.module.Module</em>) – </p></li>
+<li><p><strong>metrics</strong> (<em>Optional</em><em>[</em><em>Dict</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><em>ignite.metrics.metric.Metric</em><em>]</em><em>]</em>) – </p></li>
+<li><p><strong>device</strong> (<em>Optional</em><em>[</em><em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a><em>, </em><em>torch.device</em><em>]</em><em>]</em>) – </p></li>
+<li><p><strong>non_blocking</strong> (<a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.9)"><em>bool</em></a>) – </p></li>
+<li><p><strong>prepare_batch</strong> (<em>Callable</em>) – </p></li>
+<li><p><strong>output_transform</strong> (<em>Callable</em>) – </p></li>
+</ul>
 </dd>
 </dl>
 </dd></dl>
@@ -986,7 +1040,7 @@ contains the following attributes:</p>
 
 <dl class="py class">
 <dt id="ignite.engine.events.RemovableEventHandle">
-<em class="property">class </em><code class="sig-prename descclassname">ignite.engine.events.</code><code class="sig-name descname">RemovableEventHandle</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event_name</span><span class="p">:</span> <span class="n">Union<span class="p">[</span>ignite.engine.events.CallableEventWithFilter<span class="p">, </span>enum.Enum<span class="p">, </span>ignite.engine.events.EventsList<span class="p">]</span></span></em>, <em class="sig-param"><span class="n">handler</span><span class="p">:</span> <span class="n">Callable</span></em>, <em class="sig-param"><span class="n">engine</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ignite/engine/events.html#RemovableEventHandle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ignite.engine.events.RemovableEventHandle" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">ignite.engine.events.</code><code class="sig-name descname">RemovableEventHandle</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">event_name</span></em>, <em class="sig-param"><span class="n">handler</span></em>, <em class="sig-param"><span class="n">engine</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ignite/engine/events.html#RemovableEventHandle"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ignite.engine.events.RemovableEventHandle" title="Permalink to this definition">¶</a></dt>
 <dd><p>A weakref handle to remove a registered event.</p>
 <p>A handle that may be used to remove a registered event handler via the
 remove method, with-statement, or context manager protocol. Returned from
@@ -994,8 +1048,8 @@ remove method, with-statement, or context manager protocol. Returned from
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>event_name</strong> – Registered event name.</p></li>
-<li><p><strong>handler</strong> – Registered event handler, stored as weakref.</p></li>
+<li><p><strong>event_name</strong> (<em>Union</em><em>[</em><em>ignite.engine.events.CallableEventWithFilter</em><em>, </em><a class="reference external" href="https://docs.python.org/3/library/enum.html#enum.Enum" title="(in Python v3.9)"><em>enum.Enum</em></a><em>, </em><em>ignite.engine.events.EventsList</em><em>]</em>) – Registered event name.</p></li>
+<li><p><strong>handler</strong> (<em>Callable</em>) – Registered event handler, stored as weakref.</p></li>
 <li><p><strong>engine</strong> – Target engine, stored as weakref.</p></li>
 </ul>
 </dd>
@@ -1015,8 +1069,13 @@ remove method, with-statement, or context manager protocol. Returned from
 </div>
 <dl class="py method">
 <dt id="ignite.engine.events.RemovableEventHandle.remove">
-<code class="sig-name descname">remove</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; None<a class="reference internal" href="_modules/ignite/engine/events.html#RemovableEventHandle.remove"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ignite.engine.events.RemovableEventHandle.remove" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">remove</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ignite/engine/events.html#RemovableEventHandle.remove"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ignite.engine.events.RemovableEventHandle.remove" title="Permalink to this definition">¶</a></dt>
 <dd><p>Remove handler from engine.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.9)">None</a></p>
+</dd>
+</dl>
 </dd></dl>
 
 </dd></dl>
@@ -1043,7 +1102,7 @@ to ensure that model sees the same data for a given epoch:</p>
 </ul>
 <span class="target" id="module-ignite.engine.deterministic"></span><dl class="py class">
 <dt id="ignite.engine.deterministic.DeterministicEngine">
-<em class="property">class </em><code class="sig-prename descclassname">ignite.engine.deterministic.</code><code class="sig-name descname">DeterministicEngine</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">process_function</span><span class="p">:</span> <span class="n">Callable</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ignite/engine/deterministic.html#DeterministicEngine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ignite.engine.deterministic.DeterministicEngine" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">ignite.engine.deterministic.</code><code class="sig-name descname">DeterministicEngine</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">process_function</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ignite/engine/deterministic.html#DeterministicEngine"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ignite.engine.deterministic.DeterministicEngine" title="Permalink to this definition">¶</a></dt>
 <dd><p>Deterministic engine derived from <a class="reference internal" href="#ignite.engine.engine.Engine" title="ignite.engine.engine.Engine"><code class="xref py py-class docutils literal notranslate"><span class="pre">Engine</span></code></a>.</p>
 <p>“Deterministic” run is done by adding additional handlers to synchronize the dataflow and overriding some methods of
 <a class="reference internal" href="#ignite.engine.engine.Engine" title="ignite.engine.engine.Engine"><code class="xref py py-class docutils literal notranslate"><span class="pre">Engine</span></code></a>:</p>
@@ -1072,9 +1131,14 @@ applied.</p>
 <p>This class can produce exactly the same dataflow when resuming the run from an epoch (or more precisely from
 dataflow restart) and using torch <cite>DataLoader</cite> with <cite>num_workers &gt; 1</cite> as data provider.</p>
 </div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>process_function</strong> (<em>Callable</em>) – </p>
+</dd>
+</dl>
 <dl class="py method">
 <dt id="ignite.engine.deterministic.DeterministicEngine.state_dict">
-<code class="sig-name descname">state_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &#x2192; collections.OrderedDict<a class="reference internal" href="_modules/ignite/engine/deterministic.html#DeterministicEngine.state_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ignite.engine.deterministic.DeterministicEngine.state_dict" title="Permalink to this definition">¶</a></dt>
+<code class="sig-name descname">state_dict</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/ignite/engine/deterministic.html#DeterministicEngine.state_dict"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ignite.engine.deterministic.DeterministicEngine.state_dict" title="Permalink to this definition">¶</a></dt>
 <dd><p>Returns a dictionary containing engine’s state: “seed”, “epoch_length”, “max_epochs” and “iteration” and
 other state values defined by <cite>engine.state_dict_user_keys</cite></p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">engine</span> <span class="o">=</span> <span class="n">Engine</span><span class="p">(</span><span class="o">...</span><span class="p">)</span>
@@ -1108,7 +1172,7 @@ other state values defined by <cite>engine.state_dict_user_keys</cite></p>
 
 <dl class="py class">
 <dt id="ignite.engine.deterministic.ReproducibleBatchSampler">
-<em class="property">class </em><code class="sig-prename descclassname">ignite.engine.deterministic.</code><code class="sig-name descname">ReproducibleBatchSampler</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">*</span><span class="n">args</span></em>, <em class="sig-param"><span class="o">**</span><span class="n">kwds</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ignite/engine/deterministic.html#ReproducibleBatchSampler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ignite.engine.deterministic.ReproducibleBatchSampler" title="Permalink to this definition">¶</a></dt>
+<em class="property">class </em><code class="sig-prename descclassname">ignite.engine.deterministic.</code><code class="sig-name descname">ReproducibleBatchSampler</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">batch_sampler</span></em>, <em class="sig-param"><span class="n">start_iteration</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ignite/engine/deterministic.html#ReproducibleBatchSampler"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ignite.engine.deterministic.ReproducibleBatchSampler" title="Permalink to this definition">¶</a></dt>
 <dd><p>Reproducible batch sampler. This class internally iterates and stores indices of the input batch sampler.
 This helps to start providing data batches from an iteration in a deterministic way.</p>
 <p>Usage:</p>
@@ -1135,7 +1199,7 @@ This helps to start providing data batches from an iteration in a deterministic 
 
 <dl class="py function">
 <dt id="ignite.engine.deterministic.keep_random_state">
-<code class="sig-prename descclassname">ignite.engine.deterministic.</code><code class="sig-name descname">keep_random_state</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">func</span><span class="p">:</span> <span class="n">Callable</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ignite/engine/deterministic.html#keep_random_state"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ignite.engine.deterministic.keep_random_state" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">ignite.engine.deterministic.</code><code class="sig-name descname">keep_random_state</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">func</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ignite/engine/deterministic.html#keep_random_state"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ignite.engine.deterministic.keep_random_state" title="Permalink to this definition">¶</a></dt>
 <dd><p>Helper decorator to keep random state of torch, numpy and random intact
 while executing a function. For more details on usage, please see <a class="reference internal" href="#dataflow-synchronization"><span class="std std-ref">Dataflow synchronization</span></a>.</p>
 <dl class="field-list simple">
@@ -1147,18 +1211,21 @@ while executing a function. For more details on usage, please see <a class="refe
 
 <dl class="py function">
 <dt id="ignite.engine.deterministic.update_dataloader">
-<code class="sig-prename descclassname">ignite.engine.deterministic.</code><code class="sig-name descname">update_dataloader</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataloader</span><span class="p">:</span> <span class="n">torch.utils.data.dataloader.DataLoader</span></em>, <em class="sig-param"><span class="n">new_batch_sampler</span><span class="p">:</span> <span class="n">torch.utils.data.sampler.BatchSampler</span></em><span class="sig-paren">)</span> &#x2192; torch.utils.data.dataloader.DataLoader<a class="reference internal" href="_modules/ignite/engine/deterministic.html#update_dataloader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ignite.engine.deterministic.update_dataloader" title="Permalink to this definition">¶</a></dt>
+<code class="sig-prename descclassname">ignite.engine.deterministic.</code><code class="sig-name descname">update_dataloader</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">dataloader</span></em>, <em class="sig-param"><span class="n">new_batch_sampler</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ignite/engine/deterministic.html#update_dataloader"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#ignite.engine.deterministic.update_dataloader" title="Permalink to this definition">¶</a></dt>
 <dd><p>Helper function to replace current batch sampler of the dataloader by a new batch sampler. Function returns new
 dataloader with new batch sampler.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>dataloader</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/data.html#torch.utils.data.DataLoader" title="(in PyTorch vmaster (1.7.0a0+57bffc3 ))"><em>torch.utils.data.DataLoader</em></a>) – input dataloader</p></li>
+<li><p><strong>dataloader</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/data.html#torch.utils.data.DataLoader" title="(in PyTorch v1.8.0)"><em>torch.utils.data.DataLoader</em></a>) – input dataloader</p></li>
 <li><p><strong>new_batch_sampler</strong> (<em>torch.utils.data.sampler.BatchSampler</em>) – new batch sampler to use</p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns</dt>
 <dd class="field-even"><p>DataLoader</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>torch.utils.data.dataloader.DataLoader</p>
 </dd>
 </dl>
 </dd></dl>
@@ -1322,19 +1389,30 @@ random batches based on altered random state.</p>
   
 
   <div role="contentinfo">
-    <p>
-        &copy; Copyright 2021, PyTorch-Ignite Contributors.
-
-    </p>
-  </div>
-    
-      <div>
-        Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
-      </div>
-     
+    <table>
+      <tr>
+        <td>
+            <p>
+                &copy; Copyright 2021, PyTorch-Ignite Contributors.
+            </p>
+            
+              <div>
+                Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+              </div>
+          
+        </td>
+        <td>
+            
+              <div>
+                <a href="https://www.netlify.com"><img src="https://www.netlify.com/img/global/badges/netlify-light.svg" alt="Deploys by Netlify" /></a>
+              </div>
+            
+        </td>
+      </tr>
+    </table>
+  </div> 
 
 </footer>
-
           </div>
         </div>
 
@@ -1367,7 +1445,6 @@ random batches based on altered random state.</p>
          <script src="_static/jquery.js"></script>
          <script src="_static/underscore.js"></script>
          <script src="_static/doctools.js"></script>
-         <script src="_static/language_data.js"></script>
      
 
   
@@ -1385,10 +1462,9 @@ random batches based on altered random state.</p>
   <!-- Begin Footer -->
 
   <!-- commented out for Ignite -->
-  <!--
 
   <div class="container-fluid docs-tutorials-resources" id="docs-tutorials-resources">
-    <div class="container">
+    <!-- <div class="container">
       <div class="row">
         <div class="col-md-4 text-center">
           <h2>Docs</h2>
@@ -1408,10 +1484,10 @@ random batches based on altered random state.</p>
           <a class="with-right-arrow" href="">View Resources</a>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 
-  <footer class="site-footer">
+  <!-- <footer class="site-footer">
     <div class="container footer-container">
       <div class="footer-logo-wrapper">
         <a href="https://pytorch.org/ignite" class="footer-logo"></a>
@@ -1484,9 +1560,9 @@ random batches based on altered random state.</p>
         </div>
       </div>
     </div>
-  </footer>
+  </footer> -->
 
-  -->
+
   <!-- end of commented out for Ignite -->
 
   <div class="cookie-banner-wrapper">
@@ -1554,6 +1630,7 @@ random batches based on altered random state.</p>
   <script type="text/javascript" src="_static/js/vendor/anchor.min.js"></script>
 
   <script type="text/javascript">
+    var collapsedSections = ['Notes']
     $(document).ready(function() {
       mobileMenu.bind();
       mobileTOC.bind();
@@ -1567,6 +1644,22 @@ random batches based on altered random state.</p>
         $(this).closest("a").addClass("has-code");
       });
     })
+  </script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+  <script type="text/javascript">
+  let VERSION
+  if ('v0.4.0.post1'.includes('v')) {
+    VERSION = 'v0.4.0.post1'
+  } else {
+    VERSION = 'master'
+  }
+  docsearch({
+  apiKey: '19a7a7a75d87608d6f42c722ed1e293f',
+  indexName: 'ignite',
+  inputSelector: '#rtd-search-form input[type="text"]',
+  algoliaOptions: { 'facetFilters': [`version:${VERSION}`] },
+  debug: true // Set debug to true if you want to inspect the dropdown
+  });
   </script>
 </body>
 </html>

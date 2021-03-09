@@ -1,6 +1,7 @@
 
 
 
+
 <!DOCTYPE html>
 <!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
@@ -32,6 +33,7 @@
   <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <!-- <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" /> -->
   <link rel="stylesheet" href="../../../_static/css/ignite_theme.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" type="text/css" />
     <link rel="author" title="About these documents" href="../../../about.html" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -98,13 +100,13 @@
           </li>
 
           <li>
-            <a href="https://pytorch.org/ignite/master/about.html">About us</a>
+            <a href="https://pytorch.org/ignite/master/about.html">About us</a> 
           </li>
 
         </ul>
       </div>
 
-      <a class="main-menu-open-button" href="#" data-behavior="open-mobile-menu"></a>
+      <!-- <a class="main-menu-open-button" href="#" data-behavior="open-mobile-menu"></a> -->
     </div>
 
   </div>
@@ -144,10 +146,8 @@
 
 
 <div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search Docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
+  <form id="rtd-search-form" class="wy-form">
+    <input type="text" placeholder="Search Docs" />
   </form>
 </div>
 
@@ -347,10 +347,10 @@
 <span class="sd">    - :meth:`~ignite.metrics.Metric.completed` on every ``EPOCH_COMPLETED``.</span>
 
 <span class="sd">    Attributes:</span>
-<span class="sd">        usage_name (str): usage name string</span>
+<span class="sd">        usage_name: usage name string</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">usage_name</span> <span class="o">=</span> <span class="s2">&quot;epoch_wise&quot;</span>
+    <span class="n">usage_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;epoch_wise&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">EpochWise</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
@@ -371,10 +371,10 @@
 <span class="sd">    - :meth:`~ignite.metrics.Metric.completed` on every ``ITERATION_COMPLETED``.</span>
 
 <span class="sd">    Attributes:</span>
-<span class="sd">        usage_name (str): usage name string</span>
+<span class="sd">        usage_name: usage name string</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">usage_name</span> <span class="o">=</span> <span class="s2">&quot;batch_wise&quot;</span>
+    <span class="n">usage_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;batch_wise&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
         <span class="nb">super</span><span class="p">(</span><span class="n">BatchWise</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span>
@@ -395,8 +395,8 @@
 <span class="sd">    - :meth:`~ignite.metrics.Metric.completed` on every ``EPOCH_COMPLETED``.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        *args: Positional arguments to setup :attr:`~ignite.engine.events.Events.ITERATION_COMPLETED(*args, **kwargs)`</span>
-<span class="sd">        **kwargs: Keyword arguments to setup :attr:`~ignite.engine.events.Events.ITERATION_COMPLETED(*args, **kwargs)`</span>
+<span class="sd">        args: Positional arguments to setup :attr:`~ignite.engine.events.Events.ITERATION_COMPLETED(*args, **kwargs)`</span>
+<span class="sd">        kwargs: Keyword arguments to setup :attr:`~ignite.engine.events.Events.ITERATION_COMPLETED(*args, **kwargs)`</span>
 <span class="sd">            handled by :meth:`~ignite.metrics.Metric.iteration_completed`.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -414,17 +414,17 @@
 <span class="sd">    Base class for all Metrics.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        output_transform (callable, optional): a callable that is used to transform the</span>
+<span class="sd">        output_transform: a callable that is used to transform the</span>
 <span class="sd">            :class:`~ignite.engine.engine.Engine`&#39;s ``process_function``&#39;s output into the</span>
 <span class="sd">            form expected by the metric. This can be useful if, for example, you have a multi-output model and</span>
 <span class="sd">            you want to compute the metric with respect to one of the outputs.</span>
 <span class="sd">            By default, metrics require the output as ``(y_pred, y)`` or ``{&#39;y_pred&#39;: y_pred, &#39;y&#39;: y}``.</span>
-<span class="sd">        device (str or torch.device): specifies which device updates are accumulated on. Setting the</span>
+<span class="sd">        device: specifies which device updates are accumulated on. Setting the</span>
 <span class="sd">            metric&#39;s device to be the same as your ``update`` arguments ensures the ``update`` method is</span>
 <span class="sd">            non-blocking. By default, CPU.</span>
 
 <span class="sd">    Attributes:</span>
-<span class="sd">        required_output_keys (tuple): dictionary defines required keys to be found in ``engine.state.output`` if the</span>
+<span class="sd">        required_output_keys: dictionary defines required keys to be found in ``engine.state.output`` if the</span>
 <span class="sd">            latter is a dictionary. Default, ``(&quot;y_pred&quot;, &quot;y&quot;)``. This is useful with custom metrics that can require</span>
 <span class="sd">            other arguments than predictions ``y_pred`` and targets ``y``. See notes below for an example.</span>
 
@@ -483,7 +483,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># public class attribute</span>
-    <span class="n">required_output_keys</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;y_pred&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">)</span>  <span class="c1"># type: Optional[Tuple]</span>
+    <span class="n">required_output_keys</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Tuple</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;y_pred&quot;</span><span class="p">,</span> <span class="s2">&quot;y&quot;</span><span class="p">)</span>
     <span class="c1"># for backward compatibility</span>
     <span class="n">_required_output_keys</span> <span class="o">=</span> <span class="n">required_output_keys</span>
 
@@ -554,7 +554,7 @@
 <span class="sd">        `engine` with :meth:`~ignite.metrics.Metric.attach`.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            engine (Engine): the engine to which the metric must be attached</span>
+<span class="sd">            engine: the engine to which the metric must be attached</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span></div>
 
@@ -564,7 +564,7 @@
 <span class="sd">        `engine` with :meth:`~ignite.metrics.Metric.attach`.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            engine (Engine): the engine to which the metric must be attached</span>
+<span class="sd">            engine: the engine to which the metric must be attached</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="n">output</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_output_transform</span><span class="p">(</span><span class="n">engine</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">output</span><span class="p">)</span>
@@ -587,8 +587,8 @@
 <span class="sd">        `engine` with :meth:`~ignite.metrics.Metric.attach`.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            engine (Engine): the engine to which the metric must be attached</span>
-<span class="sd">            name (str): the name of the metric used as key in dict `engine.state.metrics`</span>
+<span class="sd">            engine: the engine to which the metric must be attached</span>
+<span class="sd">            name: the name of the metric used as key in dict `engine.state.metrics`</span>
 
 <span class="sd">        .. versionchanged:: 0.4.3</span>
 <span class="sd">            Added dict in metrics results.</span>
@@ -625,9 +625,9 @@
 <span class="sd">        contain computed metric&#39;s value under provided name.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            engine (Engine): the engine to which the metric must be attached</span>
-<span class="sd">            name (str): the name of the metric to attach</span>
-<span class="sd">            usage (str or MetricUsage, optional): the usage of the metric. Valid string values should be</span>
+<span class="sd">            engine: the engine to which the metric must be attached</span>
+<span class="sd">            name: the name of the metric to attach</span>
+<span class="sd">            usage: the usage of the metric. Valid string values should be</span>
 <span class="sd">                :attr:`ignite.metrics.EpochWise.usage_name` (default) or</span>
 <span class="sd">                :attr:`ignite.metrics.BatchWise.usage_name`.</span>
 
@@ -668,8 +668,8 @@
 <span class="sd">        and another metric (e.g. more expensive one) is done every n-th training epoch.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            engine (Engine): the engine from which the metric must be detached</span>
-<span class="sd">            usage (str or MetricUsage, optional): the usage of the metric. Valid string values should be</span>
+<span class="sd">            engine: the engine from which the metric must be detached</span>
+<span class="sd">            usage: the usage of the metric. Valid string values should be</span>
 <span class="sd">                &#39;epoch_wise&#39; (default) or &#39;batch_wise&#39;.</span>
 
 <span class="sd">        Example:</span>
@@ -710,8 +710,8 @@
 <span class="sd">        value is written to `engine.state.metrics` dictionary.</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            engine (Engine): the engine checked from which the metric should be attached</span>
-<span class="sd">            usage (str or MetricUsage, optional): the usage of the metric. Valid string values should be</span>
+<span class="sd">            engine: the engine checked from which the metric should be attached</span>
+<span class="sd">            usage: the usage of the metric. Valid string values should be</span>
 <span class="sd">                &#39;epoch_wise&#39; (default) or &#39;batch_wise&#39;.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">usage</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_check_usage</span><span class="p">(</span><span class="n">usage</span><span class="p">)</span>
@@ -817,7 +817,7 @@
 <span class="sd">    See :doc:`metrics` on how to use it.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        *attrs: attribute names of decorated class</span>
+<span class="sd">        attrs: attribute names of decorated class</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -853,6 +853,8 @@
 
 <span class="sd">    See :doc:`metrics` on how to use it.</span>
 
+<span class="sd">    Args:</span>
+<span class="sd">        func: A callable to reinit.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
@@ -877,19 +879,30 @@
   
 
   <div role="contentinfo">
-    <p>
-        &copy; Copyright 2021, PyTorch-Ignite Contributors.
-
-    </p>
-  </div>
-    
-      <div>
-        Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
-      </div>
-     
+    <table>
+      <tr>
+        <td>
+            <p>
+                &copy; Copyright 2021, PyTorch-Ignite Contributors.
+            </p>
+            
+              <div>
+                Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+              </div>
+          
+        </td>
+        <td>
+            
+              <div>
+                <a href="https://www.netlify.com"><img src="https://www.netlify.com/img/global/badges/netlify-light.svg" alt="Deploys by Netlify" /></a>
+              </div>
+            
+        </td>
+      </tr>
+    </table>
+  </div> 
 
 </footer>
-
           </div>
         </div>
 
@@ -910,7 +923,6 @@
          <script src="../../../_static/jquery.js"></script>
          <script src="../../../_static/underscore.js"></script>
          <script src="../../../_static/doctools.js"></script>
-         <script src="../../../_static/language_data.js"></script>
      
 
   
@@ -928,10 +940,9 @@
   <!-- Begin Footer -->
 
   <!-- commented out for Ignite -->
-  <!--
 
   <div class="container-fluid docs-tutorials-resources" id="docs-tutorials-resources">
-    <div class="container">
+    <!-- <div class="container">
       <div class="row">
         <div class="col-md-4 text-center">
           <h2>Docs</h2>
@@ -951,10 +962,10 @@
           <a class="with-right-arrow" href="">View Resources</a>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 
-  <footer class="site-footer">
+  <!-- <footer class="site-footer">
     <div class="container footer-container">
       <div class="footer-logo-wrapper">
         <a href="https://pytorch.org/ignite" class="footer-logo"></a>
@@ -1027,9 +1038,9 @@
         </div>
       </div>
     </div>
-  </footer>
+  </footer> -->
 
-  -->
+
   <!-- end of commented out for Ignite -->
 
   <div class="cookie-banner-wrapper">
@@ -1097,6 +1108,7 @@
   <script type="text/javascript" src="../../../_static/js/vendor/anchor.min.js"></script>
 
   <script type="text/javascript">
+    var collapsedSections = ['Notes']
     $(document).ready(function() {
       mobileMenu.bind();
       mobileTOC.bind();
@@ -1110,6 +1122,22 @@
         $(this).closest("a").addClass("has-code");
       });
     })
+  </script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+  <script type="text/javascript">
+  let VERSION
+  if ('master (0.5.0)'.includes('v')) {
+    VERSION = 'master (0.5.0)'
+  } else {
+    VERSION = 'master'
+  }
+  docsearch({
+  apiKey: '19a7a7a75d87608d6f42c722ed1e293f',
+  indexName: 'ignite',
+  inputSelector: '#rtd-search-form input[type="text"]',
+  algoliaOptions: { 'facetFilters': [`version:${VERSION}`] },
+  debug: true // Set debug to true if you want to inspect the dropdown
+  });
   </script>
 </body>
 </html>

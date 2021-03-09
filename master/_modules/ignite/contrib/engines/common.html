@@ -1,6 +1,7 @@
 
 
 
+
 <!DOCTYPE html>
 <!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
@@ -32,6 +33,7 @@
   <link rel="stylesheet" href="../../../../_static/css/theme.css" type="text/css" />
   <!-- <link rel="stylesheet" href="../../../../_static/pygments.css" type="text/css" /> -->
   <link rel="stylesheet" href="../../../../_static/css/ignite_theme.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" type="text/css" />
     <link rel="author" title="About these documents" href="../../../../about.html" />
     <link rel="index" title="Index" href="../../../../genindex.html" />
     <link rel="search" title="Search" href="../../../../search.html" /> 
@@ -98,13 +100,13 @@
           </li>
 
           <li>
-            <a href="https://pytorch.org/ignite/master/about.html">About us</a>
+            <a href="https://pytorch.org/ignite/master/about.html">About us</a> 
           </li>
 
         </ul>
       </div>
 
-      <a class="main-menu-open-button" href="#" data-behavior="open-mobile-menu"></a>
+      <!-- <a class="main-menu-open-button" href="#" data-behavior="open-mobile-menu"></a> -->
     </div>
 
   </div>
@@ -144,10 +146,8 @@
 
 
 <div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search Docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
+  <form id="rtd-search-form" class="wy-form">
+    <input type="text" placeholder="Search Docs" />
   </form>
 </div>
 
@@ -288,7 +288,7 @@
 <span></span><span class="kn">import</span> <span class="nn">numbers</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
 <span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">,</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">cast</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">,</span> <span class="n">Mapping</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">cast</span>
 
 <span class="kn">import</span> <span class="nn">torch</span>
 <span class="kn">import</span> <span class="nn">torch.nn</span> <span class="k">as</span> <span class="nn">nn</span>
@@ -305,7 +305,6 @@
     <span class="n">PolyaxonLogger</span><span class="p">,</span>
     <span class="n">ProgressBar</span><span class="p">,</span>
     <span class="n">TensorboardLogger</span><span class="p">,</span>
-    <span class="n">TrainsLogger</span><span class="p">,</span>
     <span class="n">VisdomLogger</span><span class="p">,</span>
     <span class="n">WandBLogger</span><span class="p">,</span>
     <span class="n">global_step_from_engine</span><span class="p">,</span>
@@ -346,35 +345,35 @@
 <span class="sd">        - Two progress bars on epochs and optionally on iterations</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        trainer (Engine): trainer engine. Output of trainer&#39;s `update_function` should be a dictionary</span>
+<span class="sd">        trainer: trainer engine. Output of trainer&#39;s `update_function` should be a dictionary</span>
 <span class="sd">            or sequence or a single tensor.</span>
-<span class="sd">        train_sampler (torch.utils.data.DistributedSampler, optional): Optional distributed sampler used to call</span>
+<span class="sd">        train_sampler: Optional distributed sampler used to call</span>
 <span class="sd">            `set_epoch` method on epoch started event.</span>
-<span class="sd">        to_save (dict, optional): dictionary with objects to save in the checkpoint. This argument is passed to</span>
+<span class="sd">        to_save: dictionary with objects to save in the checkpoint. This argument is passed to</span>
 <span class="sd">            :class:`~ignite.handlers.Checkpoint` instance.</span>
-<span class="sd">        save_every_iters (int, optional): saving interval. By default, `to_save` objects are stored</span>
+<span class="sd">        save_every_iters: saving interval. By default, `to_save` objects are stored</span>
 <span class="sd">            each 1000 iterations.</span>
-<span class="sd">        output_path (str, optional): output path to indicate where `to_save` objects are stored. Argument is mutually</span>
+<span class="sd">        output_path: output path to indicate where `to_save` objects are stored. Argument is mutually</span>
 <span class="sd">            exclusive with ``save_handler``.</span>
-<span class="sd">        lr_scheduler (ParamScheduler or subclass of `torch.optim.lr_scheduler._LRScheduler`): learning rate scheduler</span>
+<span class="sd">        lr_scheduler: learning rate scheduler</span>
 <span class="sd">            as native torch LRScheduler or ignite&#39;s parameter scheduler.</span>
-<span class="sd">        with_gpu_stats (bool, optional): if True, :class:`~ignite.contrib.metrics.handlers.GpuInfo` is attached to the</span>
+<span class="sd">        with_gpu_stats: if True, :class:`~ignite.contrib.metrics.GpuInfo` is attached to the</span>
 <span class="sd">            trainer. This requires `pynvml` package to be installed.</span>
-<span class="sd">        output_names (list/tuple, optional): list of names associated with `update_function` output dictionary.</span>
-<span class="sd">        with_pbars (bool, optional): if True, two progress bars on epochs and optionally on iterations are attached.</span>
+<span class="sd">        output_names: list of names associated with `update_function` output dictionary.</span>
+<span class="sd">        with_pbars: if True, two progress bars on epochs and optionally on iterations are attached.</span>
 <span class="sd">            Default, True.</span>
-<span class="sd">        with_pbar_on_iters (bool, optional): if True, a progress bar on iterations is attached to the trainer.</span>
+<span class="sd">        with_pbar_on_iters: if True, a progress bar on iterations is attached to the trainer.</span>
 <span class="sd">            Default, True.</span>
-<span class="sd">        log_every_iters (int, optional): logging interval for :class:`~ignite.contrib.metrics.handlers.GpuInfo` and for</span>
+<span class="sd">        log_every_iters: logging interval for :class:`~ignite.contrib.metrics.GpuInfo` and for</span>
 <span class="sd">            epoch-wise progress bar. Default, 100.</span>
-<span class="sd">        stop_on_nan (bool, optional): if True, :class:`~ignite.handlers.TerminateOnNan` handler is added to the trainer.</span>
+<span class="sd">        stop_on_nan: if True, :class:`~ignite.handlers.TerminateOnNan` handler is added to the trainer.</span>
 <span class="sd">            Default, True.</span>
-<span class="sd">        clear_cuda_cache (bool, optional): if True, `torch.cuda.empty_cache()` is called every end of epoch.</span>
+<span class="sd">        clear_cuda_cache: if True, `torch.cuda.empty_cache()` is called every end of epoch.</span>
 <span class="sd">            Default, True.</span>
-<span class="sd">        save_handler (callable or :class:`~ignite.handlers.checkpoint.BaseSaveHandler`, optional): Method or callable</span>
-<span class="sd">            class to use to store ``to_save``. See :class:`~ignite.handlers.checkpoint.Checkpoint` for more details.</span>
+<span class="sd">        save_handler: Method or callable</span>
+<span class="sd">            class to use to store ``to_save``. See :class:`~ignite.handlers.Checkpoint` for more details.</span>
 <span class="sd">            Argument is mutually exclusive with ``output_path``.</span>
-<span class="sd">        **kwargs: optional keyword args to be passed to construct :class:`~ignite.handlers.checkpoint.Checkpoint`.</span>
+<span class="sd">        kwargs: optional keyword args to be passed to construct :class:`~ignite.handlers.Checkpoint`.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="n">idist</span><span class="o">.</span><span class="n">get_world_size</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
@@ -639,15 +638,15 @@
 <span class="sd">        - Evaluation metrics</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        output_path (str): logging directory path</span>
-<span class="sd">        trainer (Engine): trainer engine</span>
-<span class="sd">        optimizers (torch.optim.Optimizer or dict of torch.optim.Optimizer, optional): single or dictionary of</span>
+<span class="sd">        output_path: logging directory path</span>
+<span class="sd">        trainer: trainer engine</span>
+<span class="sd">        optimizers: single or dictionary of</span>
 <span class="sd">            torch optimizers. If a dictionary, keys are used as tags arguments for logging.</span>
-<span class="sd">        evaluators (Engine or dict of Engine, optional): single or dictionary of evaluators. If a dictionary,</span>
+<span class="sd">        evaluators: single or dictionary of evaluators. If a dictionary,</span>
 <span class="sd">            keys are used as tags arguments for logging.</span>
-<span class="sd">        log_every_iters (int, optional): interval for loggers attached to iteration events. To log every iteration,</span>
+<span class="sd">        log_every_iters: interval for loggers attached to iteration events. To log every iteration,</span>
 <span class="sd">            value can be set to 1 or None.</span>
-<span class="sd">        **kwargs: optional keyword args to be passed to construct the logger.</span>
+<span class="sd">        kwargs: optional keyword args to be passed to construct the logger.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        :class:`~ignite.contrib.handlers.tensorboard_logger.TensorboardLogger`</span>
@@ -671,14 +670,14 @@
 <span class="sd">        - Evaluation metrics</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        trainer (Engine): trainer engine</span>
-<span class="sd">        optimizers (torch.optim.Optimizer or dict of torch.optim.Optimizer, optional): single or dictionary of</span>
+<span class="sd">        trainer: trainer engine</span>
+<span class="sd">        optimizers: single or dictionary of</span>
 <span class="sd">            torch optimizers. If a dictionary, keys are used as tags arguments for logging.</span>
-<span class="sd">        evaluators (Engine or dict of Engine, optional): single or dictionary of evaluators. If a dictionary,</span>
+<span class="sd">        evaluators: single or dictionary of evaluators. If a dictionary,</span>
 <span class="sd">            keys are used as tags arguments for logging.</span>
-<span class="sd">        log_every_iters (int, optional): interval for loggers attached to iteration events. To log every iteration,</span>
+<span class="sd">        log_every_iters: interval for loggers attached to iteration events. To log every iteration,</span>
 <span class="sd">            value can be set to 1 or None.</span>
-<span class="sd">        **kwargs: optional keyword args to be passed to construct the logger.</span>
+<span class="sd">        kwargs: optional keyword args to be passed to construct the logger.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        :class:`~ignite.contrib.handlers.visdom_logger.VisdomLogger`</span>
@@ -702,14 +701,14 @@
 <span class="sd">        - Evaluation metrics</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        trainer (Engine): trainer engine</span>
-<span class="sd">        optimizers (torch.optim.Optimizer or dict of torch.optim.Optimizer, optional): single or dictionary of</span>
+<span class="sd">        trainer: trainer engine</span>
+<span class="sd">        optimizers: single or dictionary of</span>
 <span class="sd">            torch optimizers. If a dictionary, keys are used as tags arguments for logging.</span>
-<span class="sd">        evaluators (Engine or dict of Engine, optional): single or dictionary of evaluators. If a dictionary,</span>
+<span class="sd">        evaluators: single or dictionary of evaluators. If a dictionary,</span>
 <span class="sd">            keys are used as tags arguments for logging.</span>
-<span class="sd">        log_every_iters (int, optional): interval for loggers attached to iteration events. To log every iteration,</span>
+<span class="sd">        log_every_iters: interval for loggers attached to iteration events. To log every iteration,</span>
 <span class="sd">            value can be set to 1 or None.</span>
-<span class="sd">        **kwargs: optional keyword args to be passed to construct the logger.</span>
+<span class="sd">        kwargs: optional keyword args to be passed to construct the logger.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        :class:`~ignite.contrib.handlers.mlflow_logger.MLflowLogger`</span>
@@ -733,14 +732,14 @@
 <span class="sd">        - Evaluation metrics</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        trainer (Engine): trainer engine</span>
-<span class="sd">        optimizers (torch.optim.Optimizer or dict of torch.optim.Optimizer, optional): single or dictionary of</span>
+<span class="sd">        trainer: trainer engine</span>
+<span class="sd">        optimizers: single or dictionary of</span>
 <span class="sd">            torch optimizers. If a dictionary, keys are used as tags arguments for logging.</span>
-<span class="sd">        evaluators (Engine or dict of Engine, optional): single or dictionary of evaluators. If a dictionary,</span>
+<span class="sd">        evaluators: single or dictionary of evaluators. If a dictionary,</span>
 <span class="sd">            keys are used as tags arguments for logging.</span>
-<span class="sd">        log_every_iters (int, optional): interval for loggers attached to iteration events. To log every iteration,</span>
+<span class="sd">        log_every_iters: interval for loggers attached to iteration events. To log every iteration,</span>
 <span class="sd">            value can be set to 1 or None.</span>
-<span class="sd">        **kwargs: optional keyword args to be passed to construct the logger.</span>
+<span class="sd">        kwargs: optional keyword args to be passed to construct the logger.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        :class:`~ignite.contrib.handlers.neptune_logger.NeptuneLogger`</span>
@@ -764,14 +763,14 @@
 <span class="sd">        - Evaluation metrics</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        trainer (Engine): trainer engine</span>
-<span class="sd">        optimizers (torch.optim.Optimizer or dict of torch.optim.Optimizer, optional): single or dictionary of</span>
+<span class="sd">        trainer: trainer engine</span>
+<span class="sd">        optimizers: single or dictionary of</span>
 <span class="sd">            torch optimizers. If a dictionary, keys are used as tags arguments for logging.</span>
-<span class="sd">        evaluators (Engine or dict of Engine, optional): single or dictionary of evaluators. If a dictionary,</span>
+<span class="sd">        evaluators: single or dictionary of evaluators. If a dictionary,</span>
 <span class="sd">            keys are used as tags arguments for logging.</span>
-<span class="sd">        log_every_iters (int, optional): interval for loggers attached to iteration events. To log every iteration,</span>
+<span class="sd">        log_every_iters: interval for loggers attached to iteration events. To log every iteration,</span>
 <span class="sd">            value can be set to 1 or None.</span>
-<span class="sd">        **kwargs: optional keyword args to be passed to construct the logger.</span>
+<span class="sd">        kwargs: optional keyword args to be passed to construct the logger.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        :class:`~ignite.contrib.handlers.wandb_logger.WandBLogger`</span>
@@ -795,14 +794,14 @@
 <span class="sd">        - Evaluation metrics</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        trainer (Engine): trainer engine</span>
-<span class="sd">        optimizers (torch.optim.Optimizer or dict of torch.optim.Optimizer, optional): single or dictionary of</span>
+<span class="sd">        trainer: trainer engine</span>
+<span class="sd">        optimizers: single or dictionary of</span>
 <span class="sd">            torch optimizers. If a dictionary, keys are used as tags arguments for logging.</span>
-<span class="sd">        evaluators (Engine or dict of Engine, optional): single or dictionary of evaluators. If a dictionary,</span>
+<span class="sd">        evaluators: single or dictionary of evaluators. If a dictionary,</span>
 <span class="sd">            keys are used as tags arguments for logging.</span>
-<span class="sd">        log_every_iters (int, optional): interval for loggers attached to iteration events. To log every iteration,</span>
+<span class="sd">        log_every_iters: interval for loggers attached to iteration events. To log every iteration,</span>
 <span class="sd">            value can be set to 1 or None.</span>
-<span class="sd">        **kwargs: optional keyword args to be passed to construct the logger.</span>
+<span class="sd">        kwargs: optional keyword args to be passed to construct the logger.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        :class:`~ignite.contrib.handlers.polyaxon_logger.PolyaxonLogger`</span>
@@ -826,14 +825,14 @@
 <span class="sd">        - Evaluation metrics</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        trainer (Engine): trainer engine</span>
-<span class="sd">        optimizers (torch.optim.Optimizer or dict of torch.optim.Optimizer, optional): single or dictionary of</span>
+<span class="sd">        trainer: trainer engine</span>
+<span class="sd">        optimizers: single or dictionary of</span>
 <span class="sd">            torch optimizers. If a dictionary, keys are used as tags arguments for logging.</span>
-<span class="sd">        evaluators (Engine or dict of Engine, optional): single or dictionary of evaluators. If a dictionary,</span>
+<span class="sd">        evaluators: single or dictionary of evaluators. If a dictionary,</span>
 <span class="sd">            keys are used as tags arguments for logging.</span>
-<span class="sd">        log_every_iters (int, optional): interval for loggers attached to iteration events. To log every iteration,</span>
+<span class="sd">        log_every_iters: interval for loggers attached to iteration events. To log every iteration,</span>
 <span class="sd">            value can be set to 1 or None.</span>
-<span class="sd">        **kwargs: optional keyword args to be passed to construct the logger.</span>
+<span class="sd">        kwargs: optional keyword args to be passed to construct the logger.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        :class:`~ignite.contrib.handlers.clearml_logger.ClearMLLogger`</span>
@@ -875,21 +874,21 @@
 <span class="sd">    ``save_handler``.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        save_handler (callable or :class:`~ignite.handlers.checkpoint.BaseSaveHandler`): Method or callable class to</span>
+<span class="sd">        save_handler: Method or callable class to</span>
 <span class="sd">            use to save engine and other provided objects. Function receives two objects: checkpoint as a dictionary</span>
 <span class="sd">            and filename. If ``save_handler`` is callable class, it can</span>
 <span class="sd">            inherit of :class:`~ignite.handlers.checkpoint.BaseSaveHandler` and optionally implement ``remove`` method</span>
 <span class="sd">            to keep a fixed number of saved checkpoints. In case if user needs to save engine&#39;s checkpoint on a disk,</span>
 <span class="sd">            ``save_handler`` can be defined with :class:`~ignite.handlers.DiskSaver`.</span>
-<span class="sd">        evaluator (Engine): evaluation engine used to provide the score</span>
-<span class="sd">        models (nn.Module or Mapping): model or dictionary with the object to save. Objects should have</span>
+<span class="sd">        evaluator: evaluation engine used to provide the score</span>
+<span class="sd">        models: model or dictionary with the object to save. Objects should have</span>
 <span class="sd">            implemented ``state_dict`` and ``load_state_dict`` methods.</span>
-<span class="sd">        metric_name (str): metric name to use for score evaluation. This metric should be present in</span>
+<span class="sd">        metric_name: metric name to use for score evaluation. This metric should be present in</span>
 <span class="sd">            `evaluator.state.metrics`.</span>
-<span class="sd">        n_saved (int, optional): number of best models to store</span>
-<span class="sd">        trainer (Engine, optional): trainer engine to fetch the epoch when saving the best model.</span>
-<span class="sd">        tag (str, optional): score name prefix: `{tag}_{metric_name}`. By default, tag is &quot;val&quot;.</span>
-<span class="sd">        **kwargs: optional keyword args to be passed to construct :class:`~ignite.handlers.checkpoint.Checkpoint`.</span>
+<span class="sd">        n_saved: number of best models to store</span>
+<span class="sd">        trainer: trainer engine to fetch the epoch when saving the best model.</span>
+<span class="sd">        tag: score name prefix: `{tag}_{metric_name}`. By default, tag is &quot;val&quot;.</span>
+<span class="sd">        kwargs: optional keyword args to be passed to construct :class:`~ignite.handlers.Checkpoint`.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        A :class:`~ignite.handlers.Checkpoint` handler.</span>
@@ -933,15 +932,15 @@
 <span class="sd">    Models with highest metric value will be retained.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        output_path (str): output path to indicate where to save best models</span>
-<span class="sd">        evaluator (Engine): evaluation engine used to provide the score</span>
-<span class="sd">        model (nn.Module): model to store</span>
-<span class="sd">        metric_name (str): metric name to use for score evaluation. This metric should be present in</span>
+<span class="sd">        output_path: output path to indicate where to save best models</span>
+<span class="sd">        evaluator: evaluation engine used to provide the score</span>
+<span class="sd">        model: model to store</span>
+<span class="sd">        metric_name: metric name to use for score evaluation. This metric should be present in</span>
 <span class="sd">            `evaluator.state.metrics`.</span>
-<span class="sd">        n_saved (int, optional): number of best models to store</span>
-<span class="sd">        trainer (Engine, optional): trainer engine to fetch the epoch when saving the best model.</span>
-<span class="sd">        tag (str, optional): score name prefix: `{tag}_{metric_name}`. By default, tag is &quot;val&quot;.</span>
-<span class="sd">        **kwargs: optional keyword args to be passed to construct :class:`~ignite.handlers.checkpoint.Checkpoint`.</span>
+<span class="sd">        n_saved: number of best models to store</span>
+<span class="sd">        trainer: trainer engine to fetch the epoch when saving the best model.</span>
+<span class="sd">        tag: score name prefix: `{tag}_{metric_name}`. By default, tag is &quot;val&quot;.</span>
+<span class="sd">        kwargs: optional keyword args to be passed to construct :class:`~ignite.handlers.Checkpoint`.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        A :class:`~ignite.handlers.Checkpoint` handler.</span>
@@ -965,10 +964,10 @@
 <span class="sd">    Metric value should increase in order to keep training and not early stop.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        patience (int): number of events to wait if no improvement and then stop the training.</span>
-<span class="sd">        evaluator (Engine): evaluation engine used to provide the score</span>
-<span class="sd">        trainer (Engine): trainer engine to stop the run if no improvement.</span>
-<span class="sd">        metric_name (str): metric name to use for score evaluation. This metric should be present in</span>
+<span class="sd">        patience: number of events to wait if no improvement and then stop the training.</span>
+<span class="sd">        evaluator: evaluation engine used to provide the score</span>
+<span class="sd">        trainer: trainer engine to stop the run if no improvement.</span>
+<span class="sd">        metric_name: metric name to use for score evaluation. This metric should be present in</span>
 <span class="sd">            `evaluator.state.metrics`.</span>
 
 <span class="sd">    Returns:</span>
@@ -993,19 +992,30 @@
   
 
   <div role="contentinfo">
-    <p>
-        &copy; Copyright 2021, PyTorch-Ignite Contributors.
-
-    </p>
-  </div>
-    
-      <div>
-        Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
-      </div>
-     
+    <table>
+      <tr>
+        <td>
+            <p>
+                &copy; Copyright 2021, PyTorch-Ignite Contributors.
+            </p>
+            
+              <div>
+                Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+              </div>
+          
+        </td>
+        <td>
+            
+              <div>
+                <a href="https://www.netlify.com"><img src="https://www.netlify.com/img/global/badges/netlify-light.svg" alt="Deploys by Netlify" /></a>
+              </div>
+            
+        </td>
+      </tr>
+    </table>
+  </div> 
 
 </footer>
-
           </div>
         </div>
 
@@ -1026,7 +1036,6 @@
          <script src="../../../../_static/jquery.js"></script>
          <script src="../../../../_static/underscore.js"></script>
          <script src="../../../../_static/doctools.js"></script>
-         <script src="../../../../_static/language_data.js"></script>
      
 
   
@@ -1044,10 +1053,9 @@
   <!-- Begin Footer -->
 
   <!-- commented out for Ignite -->
-  <!--
 
   <div class="container-fluid docs-tutorials-resources" id="docs-tutorials-resources">
-    <div class="container">
+    <!-- <div class="container">
       <div class="row">
         <div class="col-md-4 text-center">
           <h2>Docs</h2>
@@ -1067,10 +1075,10 @@
           <a class="with-right-arrow" href="">View Resources</a>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 
-  <footer class="site-footer">
+  <!-- <footer class="site-footer">
     <div class="container footer-container">
       <div class="footer-logo-wrapper">
         <a href="https://pytorch.org/ignite" class="footer-logo"></a>
@@ -1143,9 +1151,9 @@
         </div>
       </div>
     </div>
-  </footer>
+  </footer> -->
 
-  -->
+
   <!-- end of commented out for Ignite -->
 
   <div class="cookie-banner-wrapper">
@@ -1213,6 +1221,7 @@
   <script type="text/javascript" src="../../../../_static/js/vendor/anchor.min.js"></script>
 
   <script type="text/javascript">
+    var collapsedSections = ['Notes']
     $(document).ready(function() {
       mobileMenu.bind();
       mobileTOC.bind();
@@ -1226,6 +1235,22 @@
         $(this).closest("a").addClass("has-code");
       });
     })
+  </script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+  <script type="text/javascript">
+  let VERSION
+  if ('master (0.5.0)'.includes('v')) {
+    VERSION = 'master (0.5.0)'
+  } else {
+    VERSION = 'master'
+  }
+  docsearch({
+  apiKey: '19a7a7a75d87608d6f42c722ed1e293f',
+  indexName: 'ignite',
+  inputSelector: '#rtd-search-form input[type="text"]',
+  algoliaOptions: { 'facetFilters': [`version:${VERSION}`] },
+  debug: true // Set debug to true if you want to inspect the dropdown
+  });
   </script>
 </body>
 </html>

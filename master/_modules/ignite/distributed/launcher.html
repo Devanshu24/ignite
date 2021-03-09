@@ -1,6 +1,7 @@
 
 
 
+
 <!DOCTYPE html>
 <!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
@@ -32,6 +33,7 @@
   <link rel="stylesheet" href="../../../_static/css/theme.css" type="text/css" />
   <!-- <link rel="stylesheet" href="../../../_static/pygments.css" type="text/css" /> -->
   <link rel="stylesheet" href="../../../_static/css/ignite_theme.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" type="text/css" />
     <link rel="author" title="About these documents" href="../../../about.html" />
     <link rel="index" title="Index" href="../../../genindex.html" />
     <link rel="search" title="Search" href="../../../search.html" /> 
@@ -98,13 +100,13 @@
           </li>
 
           <li>
-            <a href="https://pytorch.org/ignite/master/about.html">About us</a>
+            <a href="https://pytorch.org/ignite/master/about.html">About us</a> 
           </li>
 
         </ul>
       </div>
 
-      <a class="main-menu-open-button" href="#" data-behavior="open-mobile-menu"></a>
+      <!-- <a class="main-menu-open-button" href="#" data-behavior="open-mobile-menu"></a> -->
     </div>
 
   </div>
@@ -144,10 +146,8 @@
 
 
 <div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
-    <input type="text" name="q" placeholder="Search Docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
+  <form id="rtd-search-form" class="wy-form">
+    <input type="text" placeholder="Search Docs" />
   </form>
 </div>
 
@@ -439,25 +439,25 @@
 <span class="sd">    .. _horovodrun: https://horovod.readthedocs.io/en/latest/api.html#module-horovod.run</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        backend (str, optional): backend to use: `nccl`, `gloo`, `xla-tpu`, `horovod`. If None, no distributed</span>
+<span class="sd">        backend: backend to use: `nccl`, `gloo`, `xla-tpu`, `horovod`. If None, no distributed</span>
 <span class="sd">            configuration.</span>
-<span class="sd">        nproc_per_node (int, optional): optional argument, number of processes per</span>
+<span class="sd">        nproc_per_node: optional argument, number of processes per</span>
 <span class="sd">            node to specify. If not None, :meth:`~ignite.distributed.Parallel.run` will spawn ``nproc_per_node``</span>
 <span class="sd">            processes that run input function with its arguments.</span>
-<span class="sd">        nnodes (int, optional): optional argument, number of nodes participating in distributed configuration.</span>
+<span class="sd">        nnodes: optional argument, number of nodes participating in distributed configuration.</span>
 <span class="sd">            If not None, :meth:`~ignite.distributed.Parallel.run` will spawn ``nproc_per_node``</span>
 <span class="sd">            processes that run input function with its arguments. Total world size is `nproc_per_node * nnodes`.</span>
 <span class="sd">            This option is only supported by native torch distributed module. For other modules, please setup</span>
 <span class="sd">            ``spawn_kwargs`` with backend specific arguments.</span>
-<span class="sd">        node_rank (int, optional): optional argument, current machine index. Mandatory argument if ``nnodes`` is</span>
+<span class="sd">        node_rank: optional argument, current machine index. Mandatory argument if ``nnodes`` is</span>
 <span class="sd">            specified and larger than one.</span>
 <span class="sd">            This option is only supported by native torch distributed module. For other modules, please setup</span>
 <span class="sd">            ``spawn_kwargs`` with backend specific arguments.</span>
-<span class="sd">        master_addr (str, optional): optional argument, master node TCP/IP address for torch native backends</span>
+<span class="sd">        master_addr: optional argument, master node TCP/IP address for torch native backends</span>
 <span class="sd">            (`nccl`, `gloo`). Mandatory argument if ``nnodes`` is specified and larger than one.</span>
-<span class="sd">        master_port (int, optional): optional argument, master node port for torch native backends</span>
+<span class="sd">        master_port: optional argument, master node port for torch native backends</span>
 <span class="sd">            (`nccl`, `gloo`). Mandatory argument if ``master_addr`` is specified.</span>
-<span class="sd">        **spawn_kwargs: kwargs to ``idist.spawn`` function.</span>
+<span class="sd">        spawn_kwargs: kwargs to ``idist.spawn`` function.</span>
 
 <span class="sd">    .. versionchanged:: 0.4.2</span>
 <span class="sd">        ``backend`` now accepts `horovod` distributed framework.</span>
@@ -551,10 +551,10 @@
 <span class="sd">                parallel.run(training, config, a=1, b=2)</span>
 
 <span class="sd">        Args:</span>
-<span class="sd">            func (Callable): function to execute. First argument of the function should be `local_rank` - local process</span>
+<span class="sd">            func: function to execute. First argument of the function should be `local_rank` - local process</span>
 <span class="sd">                index.</span>
-<span class="sd">            *args: positional arguments of ``func`` (without `local_rank`).</span>
-<span class="sd">            **kwargs: keyword arguments of ``func``.</span>
+<span class="sd">            args: positional arguments of ``func`` (without `local_rank`).</span>
+<span class="sd">            kwargs: keyword arguments of ``func``.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_spawn_params</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">backend</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -594,19 +594,30 @@
   
 
   <div role="contentinfo">
-    <p>
-        &copy; Copyright 2021, PyTorch-Ignite Contributors.
-
-    </p>
-  </div>
-    
-      <div>
-        Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
-      </div>
-     
+    <table>
+      <tr>
+        <td>
+            <p>
+                &copy; Copyright 2021, PyTorch-Ignite Contributors.
+            </p>
+            
+              <div>
+                Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+              </div>
+          
+        </td>
+        <td>
+            
+              <div>
+                <a href="https://www.netlify.com"><img src="https://www.netlify.com/img/global/badges/netlify-light.svg" alt="Deploys by Netlify" /></a>
+              </div>
+            
+        </td>
+      </tr>
+    </table>
+  </div> 
 
 </footer>
-
           </div>
         </div>
 
@@ -627,7 +638,6 @@
          <script src="../../../_static/jquery.js"></script>
          <script src="../../../_static/underscore.js"></script>
          <script src="../../../_static/doctools.js"></script>
-         <script src="../../../_static/language_data.js"></script>
      
 
   
@@ -645,10 +655,9 @@
   <!-- Begin Footer -->
 
   <!-- commented out for Ignite -->
-  <!--
 
   <div class="container-fluid docs-tutorials-resources" id="docs-tutorials-resources">
-    <div class="container">
+    <!-- <div class="container">
       <div class="row">
         <div class="col-md-4 text-center">
           <h2>Docs</h2>
@@ -668,10 +677,10 @@
           <a class="with-right-arrow" href="">View Resources</a>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 
-  <footer class="site-footer">
+  <!-- <footer class="site-footer">
     <div class="container footer-container">
       <div class="footer-logo-wrapper">
         <a href="https://pytorch.org/ignite" class="footer-logo"></a>
@@ -744,9 +753,9 @@
         </div>
       </div>
     </div>
-  </footer>
+  </footer> -->
 
-  -->
+
   <!-- end of commented out for Ignite -->
 
   <div class="cookie-banner-wrapper">
@@ -814,6 +823,7 @@
   <script type="text/javascript" src="../../../_static/js/vendor/anchor.min.js"></script>
 
   <script type="text/javascript">
+    var collapsedSections = ['Notes']
     $(document).ready(function() {
       mobileMenu.bind();
       mobileTOC.bind();
@@ -827,6 +837,22 @@
         $(this).closest("a").addClass("has-code");
       });
     })
+  </script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+  <script type="text/javascript">
+  let VERSION
+  if ('master (0.5.0)'.includes('v')) {
+    VERSION = 'master (0.5.0)'
+  } else {
+    VERSION = 'master'
+  }
+  docsearch({
+  apiKey: '19a7a7a75d87608d6f42c722ed1e293f',
+  indexName: 'ignite',
+  inputSelector: '#rtd-search-form input[type="text"]',
+  algoliaOptions: { 'facetFilters': [`version:${VERSION}`] },
+  debug: true // Set debug to true if you want to inspect the dropdown
+  });
   </script>
 </body>
 </html>

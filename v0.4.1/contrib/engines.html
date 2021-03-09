@@ -1,6 +1,7 @@
 
 
 
+
 <!DOCTYPE html>
 <!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
@@ -32,6 +33,7 @@
   <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
   <!-- <link rel="stylesheet" href="../_static/pygments.css" type="text/css" /> -->
   <link rel="stylesheet" href="../_static/css/ignite_theme.css" type="text/css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.css" type="text/css" />
     <link rel="author" title="About these documents" href="../about.html" />
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
@@ -100,13 +102,13 @@
           </li>
 
           <li>
-            <a href="https://pytorch.org/ignite/master/about.html">About us</a>
+            <a href="https://pytorch.org/ignite/master/about.html">About us</a> 
           </li>
 
         </ul>
       </div>
 
-      <a class="main-menu-open-button" href="#" data-behavior="open-mobile-menu"></a>
+      <!-- <a class="main-menu-open-button" href="#" data-behavior="open-mobile-menu"></a> -->
     </div>
 
   </div>
@@ -134,7 +136,7 @@
               
               
                 <div class="version">
-                  0.4.1
+                  v0.4.1
                 </div>
               
             
@@ -146,10 +148,8 @@
 
 
 <div role="search">
-  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
-    <input type="text" name="q" placeholder="Search Docs" />
-    <input type="hidden" name="check_keywords" value="yes" />
-    <input type="hidden" name="area" value="default" />
+  <form id="rtd-search-form" class="wy-form">
+    <input type="text" placeholder="Search Docs" />
   </form>
 </div>
 
@@ -551,7 +551,7 @@ Argument is mutually exclusive with <code class="docutils literal notranslate"><
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>trainer</strong> (<a class="reference internal" href="../engine.html#ignite.engine.engine.Engine" title="ignite.engine.engine.Engine"><em>Engine</em></a>) – trainer engine</p></li>
-<li><p><strong>optimizers</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/optim.html#torch.optim.Optimizer" title="(in PyTorch vmaster (1.7.0a0+57bffc3 ))"><em>torch.optim.Optimizer</em></a><em> or </em><em>dict of torch.optim.Optimizer</em><em>, </em><em>optional</em>) – single or dictionary of
+<li><p><strong>optimizers</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/optim.html#torch.optim.Optimizer" title="(in PyTorch v1.8.0)"><em>torch.optim.Optimizer</em></a><em> or </em><em>dict of torch.optim.Optimizer</em><em>, </em><em>optional</em>) – single or dictionary of
 torch optimizers. If a dictionary, keys are used as tags arguments for logging.</p></li>
 <li><p><strong>evaluators</strong> (<a class="reference internal" href="../engine.html#ignite.engine.engine.Engine" title="ignite.engine.engine.Engine"><em>Engine</em></a><em> or </em><em>dict of Engine</em><em>, </em><em>optional</em>) – single or dictionary of evaluators. If a dictionary,
 keys are used as tags arguments for logging.</p></li>
@@ -581,7 +581,7 @@ value can be set to 1 or None.</p></li>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>trainer</strong> (<a class="reference internal" href="../engine.html#ignite.engine.engine.Engine" title="ignite.engine.engine.Engine"><em>Engine</em></a>) – trainer engine</p></li>
-<li><p><strong>optimizers</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/optim.html#torch.optim.Optimizer" title="(in PyTorch vmaster (1.7.0a0+57bffc3 ))"><em>torch.optim.Optimizer</em></a><em> or </em><em>dict of torch.optim.Optimizer</em><em>, </em><em>optional</em>) – single or dictionary of
+<li><p><strong>optimizers</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/optim.html#torch.optim.Optimizer" title="(in PyTorch v1.8.0)"><em>torch.optim.Optimizer</em></a><em> or </em><em>dict of torch.optim.Optimizer</em><em>, </em><em>optional</em>) – single or dictionary of
 torch optimizers. If a dictionary, keys are used as tags arguments for logging.</p></li>
 <li><p><strong>evaluators</strong> (<a class="reference internal" href="../engine.html#ignite.engine.engine.Engine" title="ignite.engine.engine.Engine"><em>Engine</em></a><em> or </em><em>dict of Engine</em><em>, </em><em>optional</em>) – single or dictionary of evaluators. If a dictionary,
 keys are used as tags arguments for logging.</p></li>
@@ -611,7 +611,7 @@ value can be set to 1 or None.</p></li>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>trainer</strong> (<a class="reference internal" href="../engine.html#ignite.engine.engine.Engine" title="ignite.engine.engine.Engine"><em>Engine</em></a>) – trainer engine</p></li>
-<li><p><strong>optimizers</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/optim.html#torch.optim.Optimizer" title="(in PyTorch vmaster (1.7.0a0+57bffc3 ))"><em>torch.optim.Optimizer</em></a><em> or </em><em>dict of torch.optim.Optimizer</em><em>, </em><em>optional</em>) – single or dictionary of
+<li><p><strong>optimizers</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/optim.html#torch.optim.Optimizer" title="(in PyTorch v1.8.0)"><em>torch.optim.Optimizer</em></a><em> or </em><em>dict of torch.optim.Optimizer</em><em>, </em><em>optional</em>) – single or dictionary of
 torch optimizers. If a dictionary, keys are used as tags arguments for logging.</p></li>
 <li><p><strong>evaluators</strong> (<a class="reference internal" href="../engine.html#ignite.engine.engine.Engine" title="ignite.engine.engine.Engine"><em>Engine</em></a><em> or </em><em>dict of Engine</em><em>, </em><em>optional</em>) – single or dictionary of evaluators. If a dictionary,
 keys are used as tags arguments for logging.</p></li>
@@ -642,7 +642,7 @@ value can be set to 1 or None.</p></li>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>output_path</strong> (<a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.9)"><em>str</em></a>) – logging directory path</p></li>
 <li><p><strong>trainer</strong> (<a class="reference internal" href="../engine.html#ignite.engine.engine.Engine" title="ignite.engine.engine.Engine"><em>Engine</em></a>) – trainer engine</p></li>
-<li><p><strong>optimizers</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/optim.html#torch.optim.Optimizer" title="(in PyTorch vmaster (1.7.0a0+57bffc3 ))"><em>torch.optim.Optimizer</em></a><em> or </em><em>dict of torch.optim.Optimizer</em><em>, </em><em>optional</em>) – single or dictionary of
+<li><p><strong>optimizers</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/optim.html#torch.optim.Optimizer" title="(in PyTorch v1.8.0)"><em>torch.optim.Optimizer</em></a><em> or </em><em>dict of torch.optim.Optimizer</em><em>, </em><em>optional</em>) – single or dictionary of
 torch optimizers. If a dictionary, keys are used as tags arguments for logging.</p></li>
 <li><p><strong>evaluators</strong> (<a class="reference internal" href="../engine.html#ignite.engine.engine.Engine" title="ignite.engine.engine.Engine"><em>Engine</em></a><em> or </em><em>dict of Engine</em><em>, </em><em>optional</em>) – single or dictionary of evaluators. If a dictionary,
 keys are used as tags arguments for logging.</p></li>
@@ -672,7 +672,7 @@ value can be set to 1 or None.</p></li>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>trainer</strong> (<a class="reference internal" href="../engine.html#ignite.engine.engine.Engine" title="ignite.engine.engine.Engine"><em>Engine</em></a>) – trainer engine</p></li>
-<li><p><strong>optimizers</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/optim.html#torch.optim.Optimizer" title="(in PyTorch vmaster (1.7.0a0+57bffc3 ))"><em>torch.optim.Optimizer</em></a><em> or </em><em>dict of torch.optim.Optimizer</em><em>, </em><em>optional</em>) – single or dictionary of
+<li><p><strong>optimizers</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/optim.html#torch.optim.Optimizer" title="(in PyTorch v1.8.0)"><em>torch.optim.Optimizer</em></a><em> or </em><em>dict of torch.optim.Optimizer</em><em>, </em><em>optional</em>) – single or dictionary of
 torch optimizers. If a dictionary, keys are used as tags arguments for logging.</p></li>
 <li><p><strong>evaluators</strong> (<a class="reference internal" href="../engine.html#ignite.engine.engine.Engine" title="ignite.engine.engine.Engine"><em>Engine</em></a><em> or </em><em>dict of Engine</em><em>, </em><em>optional</em>) – single or dictionary of evaluators. If a dictionary,
 keys are used as tags arguments for logging.</p></li>
@@ -702,7 +702,7 @@ value can be set to 1 or None.</p></li>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>trainer</strong> (<a class="reference internal" href="../engine.html#ignite.engine.engine.Engine" title="ignite.engine.engine.Engine"><em>Engine</em></a>) – trainer engine</p></li>
-<li><p><strong>optimizers</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/optim.html#torch.optim.Optimizer" title="(in PyTorch vmaster (1.7.0a0+57bffc3 ))"><em>torch.optim.Optimizer</em></a><em> or </em><em>dict of torch.optim.Optimizer</em><em>, </em><em>optional</em>) – single or dictionary of
+<li><p><strong>optimizers</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/optim.html#torch.optim.Optimizer" title="(in PyTorch v1.8.0)"><em>torch.optim.Optimizer</em></a><em> or </em><em>dict of torch.optim.Optimizer</em><em>, </em><em>optional</em>) – single or dictionary of
 torch optimizers. If a dictionary, keys are used as tags arguments for logging.</p></li>
 <li><p><strong>evaluators</strong> (<a class="reference internal" href="../engine.html#ignite.engine.engine.Engine" title="ignite.engine.engine.Engine"><em>Engine</em></a><em> or </em><em>dict of Engine</em><em>, </em><em>optional</em>) – single or dictionary of evaluators. If a dictionary,
 keys are used as tags arguments for logging.</p></li>
@@ -732,7 +732,7 @@ value can be set to 1 or None.</p></li>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>trainer</strong> (<a class="reference internal" href="../engine.html#ignite.engine.engine.Engine" title="ignite.engine.engine.Engine"><em>Engine</em></a>) – trainer engine</p></li>
-<li><p><strong>optimizers</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/optim.html#torch.optim.Optimizer" title="(in PyTorch vmaster (1.7.0a0+57bffc3 ))"><em>torch.optim.Optimizer</em></a><em> or </em><em>dict of torch.optim.Optimizer</em><em>, </em><em>optional</em>) – single or dictionary of
+<li><p><strong>optimizers</strong> (<a class="reference external" href="https://pytorch.org/docs/stable/optim.html#torch.optim.Optimizer" title="(in PyTorch v1.8.0)"><em>torch.optim.Optimizer</em></a><em> or </em><em>dict of torch.optim.Optimizer</em><em>, </em><em>optional</em>) – single or dictionary of
 torch optimizers. If a dictionary, keys are used as tags arguments for logging.</p></li>
 <li><p><strong>evaluators</strong> (<a class="reference internal" href="../engine.html#ignite.engine.engine.Engine" title="ignite.engine.engine.Engine"><em>Engine</em></a><em> or </em><em>dict of Engine</em><em>, </em><em>optional</em>) – single or dictionary of evaluators. If a dictionary,
 keys are used as tags arguments for logging.</p></li>
@@ -773,19 +773,30 @@ value can be set to 1 or None.</p></li>
   
 
   <div role="contentinfo">
-    <p>
-        &copy; Copyright 2021, PyTorch-Ignite Contributors.
-
-    </p>
-  </div>
-    
-      <div>
-        Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
-      </div>
-     
+    <table>
+      <tr>
+        <td>
+            <p>
+                &copy; Copyright 2021, PyTorch-Ignite Contributors.
+            </p>
+            
+              <div>
+                Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+              </div>
+          
+        </td>
+        <td>
+            
+              <div>
+                <a href="https://www.netlify.com"><img src="https://www.netlify.com/img/global/badges/netlify-light.svg" alt="Deploys by Netlify" /></a>
+              </div>
+            
+        </td>
+      </tr>
+    </table>
+  </div> 
 
 </footer>
-
           </div>
         </div>
 
@@ -813,7 +824,6 @@ value can be set to 1 or None.</p></li>
          <script src="../_static/jquery.js"></script>
          <script src="../_static/underscore.js"></script>
          <script src="../_static/doctools.js"></script>
-         <script src="../_static/language_data.js"></script>
      
 
   
@@ -831,10 +841,9 @@ value can be set to 1 or None.</p></li>
   <!-- Begin Footer -->
 
   <!-- commented out for Ignite -->
-  <!--
 
   <div class="container-fluid docs-tutorials-resources" id="docs-tutorials-resources">
-    <div class="container">
+    <!-- <div class="container">
       <div class="row">
         <div class="col-md-4 text-center">
           <h2>Docs</h2>
@@ -854,10 +863,10 @@ value can be set to 1 or None.</p></li>
           <a class="with-right-arrow" href="">View Resources</a>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 
-  <footer class="site-footer">
+  <!-- <footer class="site-footer">
     <div class="container footer-container">
       <div class="footer-logo-wrapper">
         <a href="https://pytorch.org/ignite" class="footer-logo"></a>
@@ -930,9 +939,9 @@ value can be set to 1 or None.</p></li>
         </div>
       </div>
     </div>
-  </footer>
+  </footer> -->
 
-  -->
+
   <!-- end of commented out for Ignite -->
 
   <div class="cookie-banner-wrapper">
@@ -1000,6 +1009,7 @@ value can be set to 1 or None.</p></li>
   <script type="text/javascript" src="../_static/js/vendor/anchor.min.js"></script>
 
   <script type="text/javascript">
+    var collapsedSections = ['Notes']
     $(document).ready(function() {
       mobileMenu.bind();
       mobileTOC.bind();
@@ -1013,6 +1023,22 @@ value can be set to 1 or None.</p></li>
         $(this).closest("a").addClass("has-code");
       });
     })
+  </script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/docsearch.js@2/dist/cdn/docsearch.min.js"></script>
+  <script type="text/javascript">
+  let VERSION
+  if ('v0.4.1'.includes('v')) {
+    VERSION = 'v0.4.1'
+  } else {
+    VERSION = 'master'
+  }
+  docsearch({
+  apiKey: '19a7a7a75d87608d6f42c722ed1e293f',
+  indexName: 'ignite',
+  inputSelector: '#rtd-search-form input[type="text"]',
+  algoliaOptions: { 'facetFilters': [`version:${VERSION}`] },
+  debug: true // Set debug to true if you want to inspect the dropdown
+  });
   </script>
 </body>
 </html>
